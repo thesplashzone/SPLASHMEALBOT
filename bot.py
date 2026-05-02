@@ -97,7 +97,6 @@ async def scoremeal_macros(
 
     image_url = photo.url
 
-    prompt = f"""
 prompt = f"""
 You are a clean eating meal grader and macro estimator.
 
