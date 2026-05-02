@@ -135,7 +135,6 @@ Rules:
 
 Details: {details}
 """
-"""
     await interaction.response.defer()
 
     image_url = image.url
