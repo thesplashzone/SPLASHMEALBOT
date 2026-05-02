@@ -77,37 +77,29 @@ Meal description: {description}
     description="Estimate meal macros from a photo",
     guild=discord.Object(id=GUILD_ID)
 )
+@app_commands.describe(
+    image="Upload a meal photo",
+    details="Optional ingredient or serving details"
+)
 async def scoremeal_macros(
     interaction: discord.Interaction,
     image: discord.Attachment,
     details: str = ""
 ):
-@app_commands.describe(
-    photo="Upload a meal photo",
-    measurements="List the foods and measurements",
-    notes="Optional cooking or ingredient notes"
-)
-async def scoremeal_macros(
-    interaction: discord.Interaction,
-    photo: discord.Attachment,
-    measurements: str,
-    notes: str = "None"
-):
     await interaction.response.defer()
 
-    image_url = photo.url
+    image_url = image.url
 
-prompt = f"""
+    prompt = f"""
 You are a clean eating meal grader and macro estimator.
-
-Use the image plus the provided measurements.
-Treat the measurements as the primary source for macro estimation.
-Use the image and notes as context checks.
+Use the image plus the provided details.
+Treat the details as the primary source for macro estimation.
+Use the image as the main source and the details as added context.
 
 Before writing the final answer, estimate macros using this internal process:
 1. Identify each visible meal component separately.
-2. Use Measurements as the primary source for portion size and macro estimation.
-3. Use the image and Notes only to confirm, refine, or challenge the measurements.
+2. Use the provided details to refine portion size and macro estimation.
+3. Use the image to confirm, refine, or challenge the details when needed.
 4. For each component, estimate calories, protein, carbs, and fat.
 5. Pay special attention to hidden oils, butter, sauces, cheese, bread type, and cooking method.
 6. If a component is visually clear or measured clearly, keep the estimate narrow.
@@ -141,9 +133,13 @@ Rules:
 - Keep the grading system intact
 - Do not output anything except the exact format above
 
-Measurements: {measurements}
-Notes: {notes}
+Details: {details}
 """
+"""
+    await interaction.response.defer()
+
+    image_url = image.url
+
 
     try:
         response = client.responses.create(
