@@ -74,14 +74,14 @@ Meal description: {description}
 
 @bot.tree.command(
     name="scoremeal_macros",
-    description="@tree.command(name="scoremeal_macros", description="Estimate meal macros from a photo")
+    description="Estimate meal macros from a photo",
+    guild=discord.Object(id=GUILD_ID)
+)
 async def scoremeal_macros(
     interaction: discord.Interaction,
     image: discord.Attachment,
     details: str = ""
-):",
-    guild=discord.Object(id=GUILD_ID)
-)
+):
 @app_commands.describe(
     photo="Upload a meal photo",
     measurements="List the foods and measurements",
