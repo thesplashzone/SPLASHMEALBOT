@@ -82,7 +82,7 @@ Meal description: {description}
 async def scoremeal_macros(
     interaction: discord.Interaction,
     image: discord.Attachment,
-    details: str = ""
+    details: str
 ):
     await interaction.response.defer()
 
