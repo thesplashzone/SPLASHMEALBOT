@@ -77,7 +77,7 @@ Meal description: {description}
 )
 @app_commands.describe(
     image="Upload a meal photo",
-    details="Optional ingredient or serving details"
+    details="Required: include ingredients, portions, sauces, oils, and anything not obvious"
 )
 async def scoremeal_macros(
     interaction: discord.Interaction,
