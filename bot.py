@@ -33,8 +33,6 @@ async def on_ready():
 )
 async def scoremeal(interaction: discord.Interaction, photo: discord.Attachment, description: str):
     await interaction.response.defer()
-await interaction.followup.send("Got it — analyzing now...")
-    image_url = photo.url
 
     prompt = f"""
 You are a clean eating meal grader.
