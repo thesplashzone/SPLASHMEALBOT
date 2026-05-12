@@ -19,14 +19,8 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 @bot.event
 async def on_ready():
     guild = discord.Object(id=GUILD_ID)
-
-    bot.tree.clear_commands(guild=guild)
-    await bot.tree.sync(guild=guild)
-
-    print(f"Logged in as {bot.user}")
-
-    bot.tree.copy_global_to(guild=guild)
     synced = await bot.tree.sync(guild=guild)
+    print(f"Logged in as {bot.user}")
     print(f"Synced {len(synced)} commands to guild {GUILD_ID}")
 @bot.tree.command(
     name="scoremeal",
